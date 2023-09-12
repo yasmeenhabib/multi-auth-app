@@ -21,6 +21,7 @@ class UsersSeeder extends Seeder
             'name' => 'Admin User',
             'email' => 'Admin@devbunch.com',
             'password' => Hash::make('12345678'),
+            'role' => 'Admin',
         ]);
 
         // Create Teacher user
@@ -28,6 +29,7 @@ class UsersSeeder extends Seeder
             'name' => 'Teacher User',
             'email' => 'Teacher@devbunch.com',
             'password' => Hash::make('12345678'),
+            'role' => 'Teacher',
         ]);
 
         // Create Student user
@@ -35,6 +37,7 @@ class UsersSeeder extends Seeder
             'name' => 'Student User',
             'email' => 'Student@devbunch.com',
             'password' => Hash::make('12345678'),
+            'role' => 'Student',
         ]);
     }
 }

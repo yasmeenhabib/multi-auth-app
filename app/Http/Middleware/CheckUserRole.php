@@ -8,16 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckUserRole
 {
+
     public function handle(Request $request, Closure $next, ...$roles)
     {
         // Get the authenticated user
         $user = Auth::user();
+
+  
 
         if (in_array($user->role, $roles)) {
             return $next($request);
         }
 
         // Redirect or return an error response if the user doesn't have the required role.
-        return abort(403, 'Unauthorized');
+        return abort(403, 'Unauthorized. You are logged in as: ' . $user->role);
     }
 }

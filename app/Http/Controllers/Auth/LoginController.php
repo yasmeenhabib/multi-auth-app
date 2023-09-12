@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class LoginController extends Controller
 {
@@ -19,7 +22,8 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+
+        use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -37,4 +41,20 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+        protected function authenticated(Request $request, $user)
+{
+    // Get the user's role
+    $userRole = $user->role;
+
+    // Check user role and redirect accordingly
+    if ($userRole === 'admin' || $userRole === 'teacher') {
+        return redirect()->route('courses.index')->with('success', 'You have successfully logged in as an ' . ucfirst($userRole));
+    } else {
+        return redirect()->route('courses.show', ['course' => $user->id])->with('success', 'You have successfully logged in as a Student');
+    }
+}
+
+
 }

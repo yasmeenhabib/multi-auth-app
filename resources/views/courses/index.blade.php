@@ -16,9 +16,9 @@
                     <td>{{ $course->title }}</td>
                     <td>{{ $course->description }}</td>
                     <td>
-                        <a href="{{ route('courses.edit', ['course' => $course]) }}" class="btn btn-warning">Edit</a>
+                       <a href="{{ route('courses.edit', ['course' => $course]) }}" class="btn btn-warning">Edit</a>
                         <a href="{{ route('courses.destroy', ['course' => $course]) }}" class="btn btn-danger" data-method="delete" data-confirm="Are you sure you want to delete this course?">Delete</a>
-                        <a href="{{ route('courses.show', ['course' => $course]) }}" class="btn btn-info">View Details</a>
+                        <a href="{{ route('courses.show', ['course' => $course]) }}" class="btn btn-info">View Details</a> 
                     </td>
                 </tr>
             @endforeach

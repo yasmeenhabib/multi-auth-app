@@ -16,12 +16,19 @@ use Illuminate\Support\Facades\Route;
 
 // Admin and Teacher routes
 Route::middleware(['auth', 'checkrole:admin,teacher'])->group(function () {
-    Route::resource('courses', 'App\Http\Controllers\CourseController', ['except' => ['create', 'edit']]);
+    Route::resource('courses', 'App\Http\Controllers\CourseController');
 });
 
 // Student routes (Read-only)
+// Route::middleware(['auth', 'checkrole:student'])->group(function () {
+//     Route::resource('student', 'App\Http\Controllers\CourseController', ['only' => ['index']]);
+// });
+
+
+// Student routes (Read-only)
 Route::middleware(['auth', 'checkrole:student'])->group(function () {
-    Route::resource('courses', 'App\Http\Controllers\CourseController', ['only' => ['index', 'show']]);
+    Route::get('courses', 'App\Http\Controllers\CourseController@index')->name('courses.index');
+    Route::get('courses/{course}', 'App\Http\Controllers\CourseController@show')->name('courses.show');
 });
 
 
@@ -29,3 +36,5 @@ Route::resource('users', 'App\Http\Controllers\CourseController', ['except' => [
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
